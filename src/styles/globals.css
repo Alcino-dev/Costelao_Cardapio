@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -20,7 +21,76 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply min-h-screen antialiased;
+  background: url('/fundo.jpg') center center / cover fixed;
+  overflow-x: hidden;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes smoke {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-50px) scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.smoke-particle {
+  @apply absolute w-4 h-4 bg-white rounded-full blur-xl;
+  animation: smoke 3s infinite;
+}
+
+.smoke-1 { animation-delay: 0s; left: 10%; }
+.smoke-2 { animation-delay: 1s; left: 30%; }
+.smoke-3 { animation-delay: 2s; left: 50%; }
+.smoke-4 { animation-delay: 1.5s; left: 70%; }
+
+.floating-dish {
+  animation: float 6s ease-in-out infinite;
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+.glass-effect {
+  @apply backdrop-blur-lg bg-white/30;
+}
+
+.tab-active {
+  @apply relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-orange-500;
+}
+
+.loading-text {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.loading-logo {
+  animation: fadeUp 0.8s ease-out forwards;
 }
